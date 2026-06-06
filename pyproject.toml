@@ -1,0 +1,33 @@
+[project]
+name = "test4"
+version = "0.1.0"
+description = "It's a testReport's source code."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "matplotlib>=3.10.9",
+    "opencv-contrib-python>=4.13.0.92",
+    "scikit-learn>=1.9.0",
+    "torch>=2.6.0",
+    "torchvision>=0.21.0",
+]
+
+[tool.uv]
+python-install-mirror = "https://registry.npmmirror.com/-/binary/python-build-standalone/"
+
+[[tool.uv.index]]
+name = "tsinghua"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+default = true
+
+[[tool.uv.index]]
+name = "pytorch"
+url = "https://download.pytorch.org/whl/cu124"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch" }
+torchvision = { index = "pytorch" }
+
+[dependency-groups]
+dev = ["ruff>=0.15.16"]
