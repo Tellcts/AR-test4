@@ -31,15 +31,17 @@ transform_test = transforms.Compose(
 
 # 加载CIFAR-10数据集
 data_root = Path(__file__).parent.parent / "data"
+dataset = data_root / "cifar-10-batches-py"
+need_to_download = not dataset.exists()
 
 
 trainset = torchvision.datasets.CIFAR10(
-    root=data_root, train=True, download=True, transform=transform_train
+    root=data_root, train=True, download=need_to_download, transform=transform_train
 )
 trainloader = DataLoader(trainset, batch_size=128, shuffle=True, num_workers=2)
 
 testset = torchvision.datasets.CIFAR10(
-    root=data_root, train=False, download=True, transform=transform_test
+    root=data_root, train=False, download=need_to_download, transform=transform_test
 )
 testloader = DataLoader(testset, batch_size=100, shuffle=False, num_workers=2)
 

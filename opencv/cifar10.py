@@ -64,14 +64,16 @@ def load_cifar10_data():
     """加载CIFAR-10数据集"""
 
     data_root = Path(__file__).parent.parent / "data"
+    dataset = data_root / "cifar-10-batches-py"
+    need_to_download = not dataset.exists()
 
     transform = transforms.Compose([transforms.ToTensor()])
 
     trainset = torchvision.datasets.CIFAR10(
-        root=data_root, train=True, download=True, transform=transform
+        root=data_root, train=True, download=need_to_download, transform=transform
     )
     testset = torchvision.datasets.CIFAR10(
-        root=data_root, train=False, download=True, transform=transform
+        root=data_root, train=False, download=need_to_download, transform=transform
     )
 
     # 转换为numpy数组
